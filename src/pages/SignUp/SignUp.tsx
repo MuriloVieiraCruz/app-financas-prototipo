@@ -1,11 +1,45 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { 
+  BackGround, 
+  Container,
+  AreaInput, 
+  Input,
+  SubmitButton,
+  SubmitText,
+ } from '../styles/styles';
 
 const SignUp = () => {
   return (
-    <View>
-      <Text>SignUp</Text>
-    </View>
+    <BackGround>
+
+      <Container
+        behavior={Platform.OS === 'ios' ? 'padding' : ''}
+        enabled
+      >
+       <AreaInput>
+        <Input
+          placeholder='Nome'
+        />
+       </AreaInput>
+       <AreaInput>
+        <Input
+          placeholder='E-mail'
+        />
+       </AreaInput>
+       <AreaInput>
+        <Input
+          placeholder='Senha'
+        />
+       </AreaInput>
+
+       <SubmitButton>
+        <SubmitText>Cadastrar</SubmitText>
+       </SubmitButton>
+
+      </Container>
+
+    </BackGround>
   )
 }
 

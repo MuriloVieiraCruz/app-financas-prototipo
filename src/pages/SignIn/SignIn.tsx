@@ -10,7 +10,7 @@ import {
   SubmitText,
   Link,
   LinkText
- } from './styles';
+ } from '../styles/styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import SignListParam from '../../types/SignListParam';
 import { useNavigation } from '@react-navigation/native';
