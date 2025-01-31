@@ -1,5 +1,5 @@
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { 
   BackGround, 
   Container,
@@ -8,8 +8,20 @@ import {
   SubmitButton,
   SubmitText,
  } from '../styles/styles';
+import { useAuthContext } from '../../contexts/auth'
 
 const SignUp = () => {
+
+  const { signUp } = useAuthContext();
+
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  async function handleSignUp() {
+    await signUp(name, email, password);
+  }
+
   return (
     <BackGround>
 
@@ -20,20 +32,26 @@ const SignUp = () => {
        <AreaInput>
         <Input
           placeholder='Nome'
+          value={name}
+          onChangeText={setName}
         />
        </AreaInput>
        <AreaInput>
         <Input
           placeholder='E-mail'
+          value={email}
+          onChangeText={setEmail}
         />
        </AreaInput>
        <AreaInput>
         <Input
           placeholder='Senha'
+          value={password}
+          onChangeText={setPassword}
         />
        </AreaInput>
 
-       <SubmitButton>
+       <SubmitButton onPress={handleSignUp}>
         <SubmitText>Cadastrar</SubmitText>
        </SubmitButton>
 
