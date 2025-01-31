@@ -4,13 +4,16 @@ import {
   StatusBar,
 } from 'react-native';
 import Routes from './src/routes/Routes';
+import { AuthProvider } from './src/contexts/auth';
 
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="F0F4FF" barStyle="dark-content"/>
-      <Routes/>
+      <AuthProvider>
+        <StatusBar backgroundColor="F0F4FF" barStyle="dark-content"/>
+        <Routes/>
+      </AuthProvider>
     </NavigationContainer>
   );
 }
