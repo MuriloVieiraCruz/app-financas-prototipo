@@ -7,6 +7,7 @@ import SignListParam from '../types/SignListParam';
 
 interface AuthContextType {
   user: User | undefined;
+  loadingAuth: boolean;
   signUp: (
     name: string, 
     email: string, 
@@ -26,7 +27,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const navigation = useNavigation<SignNavigationProps>();
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [loadingAuth, setLoadingAuth] = useState<boolean>(false);
+
   const signUp = async (name: string, email: string, password: string) => {
+    setLoadingAuth(true);
+
     try {
       const response = await api.post('/users', {
         name: name,
@@ -34,14 +39,16 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         password: password,
       })
 
+      setLoadingAuth(false);
       navigation.goBack();
     } catch(err) {
       console.log(err);
+      setLoadingAuth(false);
     }
   };
   
   return (
-    <AuthContext.Provider value={{ user, signUp }}>
+    <AuthContext.Provider value={{ user, signUp, loadingAuth }}>
       { children }
     </AuthContext.Provider>
   );
