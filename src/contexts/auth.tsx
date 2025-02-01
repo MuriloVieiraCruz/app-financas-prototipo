@@ -8,6 +8,7 @@ import SignListParam from '../types/SignListParam';
 interface AuthContextType {
   user: User | undefined;
   loadingAuth: boolean;
+  signed: boolean;
   signUp: (
     name: string, 
     email: string, 
@@ -23,7 +24,7 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const navigation = useNavigation<SignNavigationProps>();
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -48,7 +49,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
   
   return (
-    <AuthContext.Provider value={{ user, signUp, loadingAuth }}>
+    <AuthContext.Provider value={{ signed: !!user, user, signUp, loadingAuth }}>
       { children }
     </AuthContext.Provider>
   );
